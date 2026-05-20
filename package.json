@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev -p 3010",
     "dev:clean": "node scripts/clean-next-cache.mjs && next dev -p 3010",
-    "dev:restart": "powershell -ExecutionPolicy Bypass -File scripts/restart-dev.ps1",
+    "dev:restart": "node scripts/restart-dev.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
