@@ -1,7 +1,6 @@
 'use client'
 
 import { Music2 } from 'lucide-react'
-import type { CSSProperties } from 'react'
 import { useEffect, useRef } from 'react'
 import { useTrackLyrics } from '@/hooks/useTrackLyrics'
 import type { Track } from '@/types'
@@ -13,7 +12,7 @@ interface NowPlayingLyricsProps {
 }
 
 export function NowPlayingLyrics({ track, currentTime, duration }: NowPlayingLyricsProps) {
-  const { lines, activeIndex, lineProgress, isLoading, error } = useTrackLyrics(track, currentTime, duration)
+  const { lines, activeIndex, isLoading, error } = useTrackLyrics(track, currentTime, duration)
   const activeRef = useRef<HTMLParagraphElement | null>(null)
 
   useEffect(() => {
@@ -50,7 +49,6 @@ export function NowPlayingLyrics({ track, currentTime, duration }: NowPlayingLyr
               key={`${line.timestampMs}-${line.text}`}
               ref={active ? activeRef : undefined}
               className={`lyric-line ${active ? 'lyric-line-active' : passed ? 'text-[var(--gray3)] opacity-70' : 'text-[var(--gray2)]'}`}
-              style={active ? { '--lyric-progress': `${lineProgress * 100}%` } as CSSProperties : undefined}
             >
               {line.text}
             </p>

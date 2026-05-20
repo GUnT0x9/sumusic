@@ -202,22 +202,9 @@ a {
 }
 
 .lyric-line-active {
-  width: fit-content;
-  max-width: 100%;
   font-size: 22px;
   font-weight: 500;
-  color: var(--gray2);
-  background:
-    linear-gradient(
-      90deg,
-      var(--white) 0%,
-      var(--white) var(--lyric-progress),
-      var(--gray2) var(--lyric-progress),
-      var(--gray2) 100%
-    );
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--white);
 }
 
 .premium-hero-bg {
