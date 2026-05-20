@@ -1,0 +1,235 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0a0a0a;
+  --bg2: #111111;
+  --bg3: #1a1a1a;
+  --bg4: #222222;
+  --bg5: #2a2a2a;
+  --white: #ffffff;
+  --gray1: #aaaaaa;
+  --gray2: #666666;
+  --gray3: #333333;
+  --border: #242424;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--gray1);
+  font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+}
+
+body {
+  overflow: hidden;
+}
+
+button,
+input {
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--gray2);
+  outline-offset: 2px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 2px;
+}
+
+*:hover::-webkit-scrollbar-thumb {
+  background: var(--bg5);
+}
+
+.display {
+  font-family: var(--font-bebas), 'Pretendard Variable', sans-serif;
+  letter-spacing: 1px;
+  font-weight: 500;
+  text-rendering: geometricPrecision;
+}
+
+.surface {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.skeleton {
+  background: var(--bg3);
+  border-radius: 8px;
+}
+
+.icon-button {
+  display: inline-flex;
+  min-width: 36px;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease;
+}
+
+.icon-button:hover {
+  background: var(--bg4);
+  border-color: var(--border);
+}
+
+.player-icon-button {
+  display: inline-flex;
+  width: 26px;
+  height: 26px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  color: var(--gray2);
+  transition:
+    background-color 140ms ease,
+    opacity 140ms ease;
+}
+
+.player-icon-button:hover {
+  background: var(--bg3);
+  opacity: 0.85;
+}
+
+.range-control {
+  --range-progress: 0%;
+  height: 18px;
+  cursor: pointer;
+  appearance: none;
+  background: transparent;
+}
+
+.range-control::-webkit-slider-runnable-track {
+  height: 2px;
+  border-radius: 2px;
+  background:
+    linear-gradient(
+      90deg,
+      var(--white) 0%,
+      var(--white) var(--range-progress),
+      var(--bg4) var(--range-progress),
+      var(--bg4) 100%
+    );
+}
+
+.range-control::-webkit-slider-thumb {
+  width: 8px;
+  height: 8px;
+  margin-top: -3px;
+  appearance: none;
+  border-radius: 999px;
+  background: var(--white);
+}
+
+.volume-range::-webkit-slider-runnable-track {
+  background:
+    linear-gradient(
+      90deg,
+      var(--gray1) 0%,
+      var(--gray1) var(--range-progress),
+      var(--bg4) var(--range-progress),
+      var(--bg4) 100%
+    );
+}
+
+.volume-range::-webkit-slider-thumb {
+  background: var(--gray1);
+}
+
+.context-menu-item {
+  display: flex;
+  min-height: 36px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  padding: 0 10px;
+  outline: none;
+  color: var(--gray1);
+  transition: background-color 140ms ease;
+}
+
+.context-menu-item[data-highlighted] {
+  background: var(--bg4);
+}
+
+.lyric-line {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.55;
+  transition:
+    color 300ms ease,
+    font-size 300ms ease,
+    opacity 300ms ease;
+}
+
+.lyric-line-active {
+  width: fit-content;
+  max-width: 100%;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--gray2);
+  background:
+    linear-gradient(
+      90deg,
+      var(--white) 0%,
+      var(--white) var(--lyric-progress),
+      var(--gray2) var(--lyric-progress),
+      var(--gray2) 100%
+    );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.premium-hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 82% 0%, #aaaaaa 0%, #666666 24%, transparent 48%),
+    radial-gradient(circle at 18% 0%, #333333 0%, transparent 34%),
+    linear-gradient(120deg, #0a0a0a 0%, #111111 45%, #333333 100%);
+  opacity: 0.72;
+}
+
+.error {
+  color: var(--gray2);
+}
