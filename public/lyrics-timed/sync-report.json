@@ -1,0 +1,419 @@
+{
+  "generatedAt": "2026-05-20T04:21:58.242Z",
+  "fetched": 75,
+  "fallback": 7,
+  "missing": 0,
+  "total": 82,
+  "report": [
+    {
+      "title": "2018 (이천십팔)",
+      "source": "lrclib-timestamps",
+      "lines": 55
+    },
+    {
+      "title": "내 마음대로 안되는건 너뿐이야ㅠㅠ",
+      "source": "lrclib-timestamps",
+      "lines": 58
+    },
+    {
+      "title": "내사랑내곁에",
+      "source": "heuristic",
+      "lines": 41
+    },
+    {
+      "title": "아리랑",
+      "source": "lrclib-timestamps",
+      "lines": 64
+    },
+    {
+      "title": "blue snail",
+      "source": "lrclib-timestamps",
+      "lines": 52
+    },
+    {
+      "title": "Concentration",
+      "source": "lrclib-timestamps",
+      "lines": 75
+    },
+    {
+      "title": "jelly!",
+      "source": "lrclib-timestamps",
+      "lines": 41
+    },
+    {
+      "title": "Misfit97",
+      "source": "lrclib-timestamps",
+      "lines": 34
+    },
+    {
+      "title": "Monster",
+      "source": "lrclib-timestamps",
+      "lines": 44
+    },
+    {
+      "title": "Oasis",
+      "source": "lrclib-timestamps",
+      "lines": 60
+    },
+    {
+      "title": "Walk",
+      "source": "lrclib-timestamps",
+      "lines": 91
+    },
+    {
+      "title": "가시",
+      "source": "lrclib-timestamps",
+      "lines": 28
+    },
+    {
+      "title": "꿈속에 너 (Feat. 전상근) (Piano Ver.)",
+      "source": "heuristic",
+      "lines": 48
+    },
+    {
+      "title": "너를 만나",
+      "source": "lrclib-timestamps",
+      "lines": 43
+    },
+    {
+      "title": "모든 날, 모든 순간 Every day, Every Moment",
+      "source": "lrclib-timestamps",
+      "lines": 29
+    },
+    {
+      "title": "사랑의 바보",
+      "source": "lrclib-timestamps",
+      "lines": 39
+    },
+    {
+      "title": "여전히 아름다운지",
+      "source": "lrclib-timestamps",
+      "lines": 26
+    },
+    {
+      "title": "Good old days (그날처럼)",
+      "source": "lrclib-timestamps",
+      "lines": 33
+    },
+    {
+      "title": "HeeJae (희재)",
+      "source": "lrclib-timestamps",
+      "lines": 42
+    },
+    {
+      "title": "I will be your shining star (밝게 빛나는 별이 되어 비춰줄게)",
+      "source": "lrclib-timestamps",
+      "lines": 44
+    },
+    {
+      "title": "If you lovingly call my name (다정히 내 이름을 부르면)",
+      "source": "lrclib-timestamps",
+      "lines": 56
+    },
+    {
+      "title": "My Way",
+      "source": "lrclib-timestamps",
+      "lines": 33
+    },
+    {
+      "title": "Old Song (오래된 노래)",
+      "source": "lrclib-timestamps",
+      "lines": 43
+    },
+    {
+      "title": "One Day Only (사계) (하루살이)",
+      "source": "lrclib-timestamps",
+      "lines": 31
+    },
+    {
+      "title": "Pass by",
+      "source": "lrclib-timestamps",
+      "lines": 40
+    },
+    {
+      "title": "Remember Me (기억해줘요 내 모든 날과 그때를)",
+      "source": "lrclib-timestamps",
+      "lines": 30
+    },
+    {
+      "title": "나무 (나무)",
+      "source": "lrclib-timestamps",
+      "lines": 31
+    },
+    {
+      "title": "살아간다",
+      "source": "heuristic",
+      "lines": 31
+    },
+    {
+      "title": "잘 지내자, 우리",
+      "source": "lrclib-timestamps",
+      "lines": 34
+    },
+    {
+      "title": "Can't Love You Anymore (With OHHYUK) (사랑이 잘 (With 오혁))",
+      "source": "lrclib-timestamps",
+      "lines": 58
+    },
+    {
+      "title": "EVERYTHING",
+      "source": "lrclib-timestamps",
+      "lines": 27
+    },
+    {
+      "title": "for lovers who hesitate (주저하는 연인들을 위해)",
+      "source": "lrclib-timestamps",
+      "lines": 32
+    },
+    {
+      "title": "For the gone(with ELLE KOREA) (사라진 모든 것들에게(with ELLE KOREA))",
+      "source": "heuristic",
+      "lines": 67
+    },
+    {
+      "title": "Love Shine",
+      "source": "lrclib-timestamps",
+      "lines": 26
+    },
+    {
+      "title": "Mondegreen",
+      "source": "lrclib-timestamps",
+      "lines": 23
+    },
+    {
+      "title": "Paul",
+      "source": "lrclib-timestamps",
+      "lines": 33
+    },
+    {
+      "title": "Silently Completely Eternally",
+      "source": "lrclib-timestamps",
+      "lines": 24
+    },
+    {
+      "title": "What was that (그게 뭐라고)",
+      "source": "lrclib-timestamps",
+      "lines": 38
+    },
+    {
+      "title": "1245 (Stripped)",
+      "source": "heuristic",
+      "lines": 62
+    },
+    {
+      "title": "Camila Cabello - Havana (Audio) ft. Young Thug",
+      "source": "lrclib-timestamps",
+      "lines": 97
+    },
+    {
+      "title": "double take",
+      "source": "lrclib-timestamps",
+      "lines": 69
+    },
+    {
+      "title": "Here With Me",
+      "source": "lrclib-timestamps",
+      "lines": 33
+    },
+    {
+      "title": "I Don’t Think That I Like Her",
+      "source": "lrclib-timestamps",
+      "lines": 67
+    },
+    {
+      "title": "i swear i'll never leave again",
+      "source": "lrclib-timestamps",
+      "lines": 35
+    },
+    {
+      "title": "Justin Bieber - Sorry (Lyric Video)",
+      "source": "lrclib-timestamps",
+      "lines": 61
+    },
+    {
+      "title": "luther",
+      "source": "lrclib-timestamps",
+      "lines": 51
+    },
+    {
+      "title": "Paris in the Rain",
+      "source": "lrclib-timestamps",
+      "lines": 73
+    },
+    {
+      "title": "Payphone",
+      "source": "lrclib-timestamps",
+      "lines": 149
+    },
+    {
+      "title": "Shape of You",
+      "source": "lrclib-timestamps",
+      "lines": 116
+    },
+    {
+      "title": "Soft Spot",
+      "source": "lrclib-timestamps",
+      "lines": 45
+    },
+    {
+      "title": "Sugar",
+      "source": "lrclib-timestamps",
+      "lines": 106
+    },
+    {
+      "title": "us",
+      "source": "lrclib-timestamps",
+      "lines": 55
+    },
+    {
+      "title": "1219 Epiphany",
+      "source": "lrclib-timestamps",
+      "lines": 61
+    },
+    {
+      "title": "Better Than Yesterday Feat. Mr. Room9, 배치기, Ktcob, Mc Bk, Outsider, P-Masta",
+      "source": "lrclib-timestamps",
+      "lines": 142
+    },
+    {
+      "title": "Bumper Car (범퍼카) (Feat. NOEL, Young B)",
+      "source": "lrclib-timestamps",
+      "lines": 42
+    },
+    {
+      "title": "Guilty",
+      "source": "lrclib-timestamps",
+      "lines": 98
+    },
+    {
+      "title": "Irony",
+      "source": "lrclib-timestamps",
+      "lines": 40
+    },
+    {
+      "title": "Jeon-Yum (Til Infinity)",
+      "source": "heuristic",
+      "lines": 108
+    },
+    {
+      "title": "John Cena (feat. Northfacegawd, JUSTHIS, Layone)",
+      "source": "lrclib-timestamps",
+      "lines": 83
+    },
+    {
+      "title": "LOV3 (Feat. Bryan Chase, Okasian) (LOV3 (Feat. Bryan Chase, Okasian))",
+      "source": "lrclib-timestamps",
+      "lines": 105
+    },
+    {
+      "title": "Love Letter",
+      "source": "lrclib-timestamps",
+      "lines": 56
+    },
+    {
+      "title": "My Life",
+      "source": "lrclib-timestamps",
+      "lines": 59
+    },
+    {
+      "title": "No easy",
+      "source": "lrclib-timestamps",
+      "lines": 73
+    },
+    {
+      "title": "OUTTA SPACE",
+      "source": "lrclib-timestamps",
+      "lines": 92
+    },
+    {
+      "title": "TREESH (feat. Sik-K, HAON)",
+      "source": "lrclib-timestamps",
+      "lines": 123
+    },
+    {
+      "title": "Ugh!",
+      "source": "lrclib-timestamps",
+      "lines": 41
+    },
+    {
+      "title": "wish",
+      "source": "lrclib-timestamps",
+      "lines": 84
+    },
+    {
+      "title": "꽃 길 (Flower Road)",
+      "source": "heuristic",
+      "lines": 63
+    },
+    {
+      "title": "Attention",
+      "source": "lrclib-timestamps",
+      "lines": 68
+    },
+    {
+      "title": "FAMOUS",
+      "source": "lrclib-timestamps",
+      "lines": 74
+    },
+    {
+      "title": "Ice Cream Cake",
+      "source": "lrclib-timestamps",
+      "lines": 94
+    },
+    {
+      "title": "IF YOU",
+      "source": "lrclib-timestamps",
+      "lines": 56
+    },
+    {
+      "title": "LIKEY",
+      "source": "lrclib-timestamps",
+      "lines": 64
+    },
+    {
+      "title": "LOVE DIVE (LOVE DIVE)",
+      "source": "lrclib-timestamps",
+      "lines": 42
+    },
+    {
+      "title": "Magnetic",
+      "source": "lrclib-timestamps",
+      "lines": 62
+    },
+    {
+      "title": "OMG",
+      "source": "lrclib-timestamps",
+      "lines": 90
+    },
+    {
+      "title": "RUDE!",
+      "source": "lrclib-timestamps",
+      "lines": 84
+    },
+    {
+      "title": "Soda Pop",
+      "source": "lrclib-timestamps",
+      "lines": 59
+    },
+    {
+      "title": "SPAGHETTI (feat. j-hope of BTS)",
+      "source": "lrclib-timestamps",
+      "lines": 70
+    },
+    {
+      "title": "Thirsty",
+      "source": "lrclib-timestamps",
+      "lines": 85
+    },
+    {
+      "title": "Whiplash",
+      "source": "lrclib-timestamps",
+      "lines": 116
+    },
+    {
+      "title": "WICKED",
+      "source": "lrclib-timestamps",
+      "lines": 77
+    }
+  ]
+}

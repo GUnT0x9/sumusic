@@ -22,19 +22,56 @@ const textFetcher = async (url: string) => {
   return response.text()
 }
 
-function parseLyricsText(text: string, durationMs: number): TimedLyricLine[] {
+function parseTimestampToMs(minutes: string, seconds: string, fraction = '0') {
+  const fractionMs = Number(fraction.length === 3 ? fraction : fraction.padEnd(3, '0'))
+  return Number(minutes) * 60_000 + Number(seconds) * 1000 + fractionMs
+}
+
+function parseLrcText(text: string, durationMs: number): TimedLyricLine[] {
+  const lines = text
+    .split(/\r?\n/)
+    .flatMap((line) => {
+      const timestampMatches = [...line.matchAll(/\[(\d{1,2}):(\d{2})(?:[.:](\d{1,3}))?\]/g)]
+      const textLine = line.replace(/\[(\d{1,2}):(\d{2})(?:[.:](\d{1,3}))?\]/g, '').trim()
+
+      if (timestampMatches.length === 0 || textLine.length === 0) return []
+
+      return timestampMatches.map((match) => ({
+        timestampMs: parseTimestampToMs(match[1], match[2], match[3]),
+        text: textLine,
+        language: 'ko' as const,
+      }))
+    })
+    .filter((line) => Number.isFinite(line.timestampMs))
+    .sort((a, b) => a.timestampMs - b.timestampMs)
+
+  return lines.map((line, index) => ({
+    ...line,
+    endTimestampMs: index === lines.length - 1 ? durationMs : Math.max(line.timestampMs + 1, lines[index + 1].timestampMs),
+  }))
+}
+
+function parsePlainLyricsText(text: string, durationMs: number): TimedLyricLine[] {
   const lines = text
     .split(/\r?\n/)
     .map((line) => line.trim())
-    .filter(Boolean)
+    .filter((line) => line.length > 0 && !line.startsWith('['))
 
   if (lines.length === 0) return []
 
-  const interval = Math.max(1200, Math.floor(durationMs / lines.length))
+  const startMs = Math.min(10_000, Math.floor(durationMs * 0.05))
+  const endMs = Math.max(startMs + lines.length * 950, Math.floor(durationMs * 0.94))
+  const weights = lines.map((line) => Math.max(0.8, Math.min(3.4, line.replace(/\s+/g, '').length / 14)))
+  const totalWeight = weights.reduce((sum, weight) => sum + weight, 0)
+  let cursor = 0
 
   return lines.map((textLine, index) => {
-    const timestampMs = Math.min(index * interval, durationMs)
-    const endTimestampMs = index === lines.length - 1 ? durationMs : Math.min((index + 1) * interval, durationMs)
+    const timestampMs = Math.floor(startMs + ((endMs - startMs) * cursor) / totalWeight)
+    cursor += weights[index]
+    const endTimestampMs =
+      index === lines.length - 1
+        ? durationMs
+        : Math.floor(startMs + ((endMs - startMs) * cursor) / totalWeight)
     return {
       timestampMs,
       endTimestampMs,
@@ -42,6 +79,12 @@ function parseLyricsText(text: string, durationMs: number): TimedLyricLine[] {
       language: 'ko',
     }
   })
+}
+
+function parseLyricsText(text: string, durationMs: number): TimedLyricLine[] {
+  const lrcLines = parseLrcText(text, durationMs)
+  if (lrcLines.length > 0) return lrcLines
+  return parsePlainLyricsText(text, durationMs)
 }
 
 function findActiveIndex(lines: TimedLyricLine[], currentTimeMs: number) {
