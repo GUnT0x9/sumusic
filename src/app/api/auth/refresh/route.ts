@@ -1,6 +1,5 @@
-import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
-import { createAccessToken, getRefreshCookie, getUsersCollection, setRefreshCookie, createRefreshToken, verifyRefreshToken, toAuthUser } from '@/lib/server/auth'
+import { createAccessToken, createRefreshToken, findUserById, getRefreshCookie, setRefreshCookie, toAuthUser, verifyRefreshToken } from '@/lib/server/auth'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -13,12 +12,11 @@ export async function POST() {
     }
 
     const payload = verifyRefreshToken(refreshToken)
-    if (!payload.sub || !ObjectId.isValid(payload.sub)) {
+    if (!payload.sub || typeof payload.sub !== 'string') {
       return NextResponse.json({ error: '로그인이 필요해요' }, { status: 401 })
     }
 
-    const users = await getUsersCollection()
-    const user = await users.findOne({ _id: new ObjectId(payload.sub) })
+    const user = await findUserById(payload.sub)
     if (!user) {
       return NextResponse.json({ error: '로그인이 필요해요' }, { status: 401 })
     }

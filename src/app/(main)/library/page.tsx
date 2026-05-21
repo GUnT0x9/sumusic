@@ -74,6 +74,7 @@ export default function LibraryPage() {
               type="button"
               aria-label={`${playlist.title} 삭제`}
               onClick={() => {
+                if (!window.confirm(`${playlist.title} 플레이리스트를 삭제할까요?`)) return
                 deletePlaylist(playlist.id)
                 addToast('플레이리스트를 삭제했어요', 'success')
               }}

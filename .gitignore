@@ -22,3 +22,6 @@ pnpm-debug.log*
 public/audio/
 
 tsconfig.tsbuildinfo
+
+# Local file database
+data/

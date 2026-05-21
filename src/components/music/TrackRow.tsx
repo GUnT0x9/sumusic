@@ -1,7 +1,7 @@
 'use client'
 
 import * as ContextMenu from '@radix-ui/react-context-menu'
-import { Heart, ListPlus, MoreHorizontal, Play, Share2, SkipForward } from 'lucide-react'
+import { ArrowDown, ArrowUp, Heart, ListPlus, MoreHorizontal, Play, Share2, SkipForward } from 'lucide-react'
 import { useState } from 'react'
 import type { Track } from '@/types'
 import { formatTime } from '@/lib/formatTime'
@@ -20,7 +20,7 @@ interface TrackRowProps {
 
 export function TrackRow({ track, index, tracks, playlistId }: TrackRowProps) {
   const { currentTrack, setQueue, addToQueue, playNext } = usePlayerStore()
-  const { playlists, isLiked, toggleLikedTrack, addTrackToPlaylist, removeTrackFromPlaylist } = useLibraryStore()
+  const { playlists, isLiked, toggleLikedTrack, addTrackToPlaylist, removeTrackFromPlaylist, reorderPlaylistTrack } = useLibraryStore()
   const { addToast } = useUIStore()
   const [menuOpen, setMenuOpen] = useState(false)
   const active = currentTrack?.id === track.id
@@ -50,7 +50,7 @@ export function TrackRow({ track, index, tracks, playlistId }: TrackRowProps) {
   return (
     <ContextMenu.Root>
       <ContextMenu.Trigger asChild>
-        <div className={`group relative grid min-h-[50px] grid-cols-[26px_1fr_58px_78px] items-center gap-2 rounded-[7px] px-2.5 py-[7px] text-sm text-[var(--gray2)] transition-colors duration-150 ease-in hover:bg-[var(--bg3)] md:grid-cols-[26px_1fr_80px_86px] ${active ? 'bg-[var(--bg3)]' : ''}`}>
+        <div className={`group relative grid min-h-[50px] grid-cols-[26px_1fr_58px_78px] items-center gap-2 rounded-[7px] px-2.5 py-[7px] text-sm text-[var(--gray2)] transition-colors duration-150 ease-in hover:bg-[var(--bg3)] md:grid-cols-[26px_1fr_80px_126px] ${active ? 'bg-[var(--bg3)]' : ''}`}>
           <button className="flex h-9 w-9 items-center justify-center rounded-[7px] text-[var(--gray3)] transition-colors duration-150 ease-in group-hover:text-[var(--gray1)]" type="button" aria-label={`${track.title} 재생`} onClick={playNow}>
             {active ? <EqualizerBars /> : (
               <>
@@ -68,6 +68,34 @@ export function TrackRow({ track, index, tracks, playlistId }: TrackRowProps) {
           </div>
           <span className="text-right text-xs font-light text-[var(--gray2)] md:text-left">{formatTime(track.durationMs)}</span>
           <div className="flex justify-end gap-1">
+            {playlistId ? (
+              <span className="hidden gap-1 md:flex">
+                <button
+                  className="icon-button"
+                  type="button"
+                  aria-label={`${track.title} 위로 이동`}
+                  disabled={index === 0}
+                  onClick={() => {
+                    reorderPlaylistTrack(playlistId, index, index - 1)
+                    addToast('곡 순서를 변경했어요', 'success')
+                  }}
+                >
+                  <ArrowUp size={14} strokeWidth={1.5} />
+                </button>
+                <button
+                  className="icon-button"
+                  type="button"
+                  aria-label={`${track.title} 아래로 이동`}
+                  disabled={index === tracks.length - 1}
+                  onClick={() => {
+                    reorderPlaylistTrack(playlistId, index, index + 1)
+                    addToast('곡 순서를 변경했어요', 'success')
+                  }}
+                >
+                  <ArrowDown size={14} strokeWidth={1.5} />
+                </button>
+              </span>
+            ) : null}
             <button className={`icon-button ${liked ? 'text-[var(--gray1)]' : ''}`} type="button" aria-label={liked ? '좋아요 해제' : '좋아요'} onClick={toggleLike}>
               <Heart size={14} strokeWidth={1.5} fill={liked ? 'currentColor' : 'none'} />
             </button>
@@ -95,6 +123,14 @@ export function TrackRow({ track, index, tracks, playlistId }: TrackRowProps) {
                 }}
                 onToggleLike={toggleLike}
                 onAddPlaylist={addPlaylistTrack}
+                onMoveUp={playlistId && index > 0 ? () => {
+                  reorderPlaylistTrack(playlistId, index, index - 1)
+                  addToast('곡 순서를 변경했어요', 'success')
+                } : undefined}
+                onMoveDown={playlistId && index < tracks.length - 1 ? () => {
+                  reorderPlaylistTrack(playlistId, index, index + 1)
+                  addToast('곡 순서를 변경했어요', 'success')
+                } : undefined}
                 onRemove={() => {
                   if (!playlistId) return
                   removeTrackFromPlaylist(playlistId, track.id)
@@ -137,6 +173,14 @@ export function TrackRow({ track, index, tracks, playlistId }: TrackRowProps) {
         }}
         onToggleLike={toggleLike}
         onAddPlaylist={addPlaylistTrack}
+        onMoveUp={playlistId && index > 0 ? () => {
+          reorderPlaylistTrack(playlistId, index, index - 1)
+          addToast('곡 순서를 변경했어요', 'success')
+        } : undefined}
+        onMoveDown={playlistId && index < tracks.length - 1 ? () => {
+          reorderPlaylistTrack(playlistId, index, index + 1)
+          addToast('곡 순서를 변경했어요', 'success')
+        } : undefined}
         onRemove={() => {
           if (!playlistId) return
           removeTrackFromPlaylist(playlistId, track.id)
@@ -157,6 +201,8 @@ interface TrackMenuProps {
   onAddQueue: () => void
   onToggleLike: () => void
   onAddPlaylist: (playlistId: string) => void
+  onMoveUp?: () => void
+  onMoveDown?: () => void
   onRemove: () => void
   onShare: () => void
 }
@@ -170,6 +216,8 @@ function TrackMenu({
   onAddQueue,
   onToggleLike,
   onAddPlaylist,
+  onMoveUp,
+  onMoveDown,
   onRemove,
   onShare,
 }: TrackMenuProps) {
@@ -201,6 +249,8 @@ function TrackMenu({
         <ContextMenu.Item className="context-menu-item" onSelect={onToggleLike}>
           <Heart size={14} strokeWidth={1.5} fill={liked ? 'currentColor' : 'none'} /> {liked ? '좋아요 해제' : '좋아요'}
         </ContextMenu.Item>
+        {onMoveUp ? <ContextMenu.Item className="context-menu-item" onSelect={onMoveUp}>위로 이동</ContextMenu.Item> : null}
+        {onMoveDown ? <ContextMenu.Item className="context-menu-item" onSelect={onMoveDown}>아래로 이동</ContextMenu.Item> : null}
         {canRemove ? <ContextMenu.Item className="context-menu-item" onSelect={onRemove}>플레이리스트에서 제거</ContextMenu.Item> : null}
         <ContextMenu.Item className="context-menu-item" onSelect={onShare}>
           <Share2 size={14} strokeWidth={1.5} /> 공유

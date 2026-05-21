@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs'
 import { NextResponse } from 'next/server'
-import { createAccessToken, createRefreshToken, getUsersCollection, setRefreshCookie, toAuthUser } from '@/lib/server/auth'
+import { createAccessToken, createRefreshToken, findUserByEmail, setRefreshCookie, toAuthUser } from '@/lib/server/auth'
 import { isValidEmail, normalizeEmail } from '@/lib/server/validation'
 
 export const runtime = 'nodejs'
@@ -16,8 +16,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: '이메일과 비밀번호를 확인해주세요' }, { status: 400 })
     }
 
-    const users = await getUsersCollection()
-    const user = await users.findOne({ email })
+    const user = await findUserByEmail(email)
     if (!user) {
       return NextResponse.json({ error: '이메일 또는 비밀번호가 올바르지 않아요' }, { status: 401 })
     }

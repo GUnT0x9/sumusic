@@ -1,16 +1,23 @@
 import { NextResponse } from 'next/server'
-import { getMongoDb } from '@/lib/server/mongodb'
+import { readDb } from '@/lib/server/db'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 export async function GET() {
   try {
-    const db = await getMongoDb()
-    await db.command({ ping: 1 })
-    return NextResponse.json({ data: { ok: true, database: db.databaseName } })
+    const db = await readDb()
+    return NextResponse.json({
+      data: {
+        ok: true,
+        database: 'sumusic-file-db',
+        users: db.users.length,
+        teams: db.teams.length,
+        teamInvites: db.teamInvites.length
+      }
+    })
   } catch (error) {
-    console.error('MongoDB health check failed:', error)
-    return NextResponse.json({ error: 'MongoDB 연결에 실패했어요' }, { status: 500 })
+    console.error('File DB health check failed:', error)
+    return NextResponse.json({ error: 'DB 상태를 확인할 수 없어요' }, { status: 500 })
   }
 }

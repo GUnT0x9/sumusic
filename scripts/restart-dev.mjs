@@ -2,7 +2,7 @@ import { execSync, spawn } from 'node:child_process'
 import { rmSync } from 'node:fs'
 import { join } from 'node:path'
 
-const ports = [3000, 3010]
+const ports = [3010]
 
 function run(command) {
   try {

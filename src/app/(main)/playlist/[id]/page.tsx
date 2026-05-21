@@ -118,6 +118,7 @@ export default function PlaylistPage({ params }: { params: { id: string } }) {
                 className="inline-flex min-h-10 items-center gap-2 rounded-[10px] border border-[var(--border)] px-4 text-sm text-[var(--gray2)] transition-colors duration-150 ease-in hover:bg-[var(--bg4)]"
                 type="button"
                 onClick={() => {
+                  if (!window.confirm('이 플레이리스트의 모든 곡을 비울까요?')) return
                   clearPlaylist(playlist.id)
                   addToast('플레이리스트를 비웠어요', 'success')
                 }}
@@ -129,6 +130,7 @@ export default function PlaylistPage({ params }: { params: { id: string } }) {
                 className="inline-flex min-h-10 items-center gap-2 rounded-[10px] border border-[var(--border)] px-4 text-sm text-[var(--gray2)] transition-colors duration-150 ease-in hover:bg-[var(--bg4)]"
                 type="button"
                 onClick={() => {
+                  if (!window.confirm(`${playlist.title} 플레이리스트를 삭제할까요?`)) return
                   deletePlaylist(playlist.id)
                   addToast('플레이리스트를 삭제했어요', 'success')
                   router.push('/library')
@@ -146,7 +148,7 @@ export default function PlaylistPage({ params }: { params: { id: string } }) {
         <div className="space-y-3">
           <div className="flex items-end justify-between">
             <h2 className="display text-4xl text-[var(--gray1)]">수록곡</h2>
-            <span className="text-xs text-[var(--gray2)]">우클릭 또는 메뉴로 곡을 관리하세요</span>
+            <span className="text-xs text-[var(--gray2)]">우클릭, 메뉴, 화살표로 곡을 관리하세요</span>
           </div>
           <div className="space-y-1">
         {playlist.tracks.length > 0 ? playlist.tracks.map((track, index) => <TrackRow key={track.id} track={track} index={index} tracks={playlist.tracks} playlistId={playlist.id} />) : <p className="text-sm text-[var(--gray1)]">아직 추가된 트랙이 없어요</p>}

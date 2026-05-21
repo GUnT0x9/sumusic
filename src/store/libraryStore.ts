@@ -15,6 +15,7 @@ interface LibraryState {
   deletePlaylist: (playlistId: string) => void
   addTrackToPlaylist: (playlistId: string, track: Track) => boolean
   removeTrackFromPlaylist: (playlistId: string, trackId: string) => void
+  reorderPlaylistTrack: (playlistId: string, fromIndex: number, toIndex: number) => void
   clearPlaylist: (playlistId: string) => void
 }
 
@@ -91,6 +92,23 @@ export const useLibraryStore = create<LibraryState>()(
                 }
               : playlist
           ),
+        }))
+      },
+      reorderPlaylistTrack: (playlistId, fromIndex, toIndex) => {
+        set((state) => ({
+          playlists: state.playlists.map((playlist) => {
+            if (playlist.id !== playlistId) return playlist
+            if (fromIndex < 0 || toIndex < 0 || fromIndex >= playlist.tracks.length || toIndex >= playlist.tracks.length) return playlist
+
+            const nextTracks = [...playlist.tracks]
+            const [movedTrack] = nextTracks.splice(fromIndex, 1)
+            nextTracks.splice(toIndex, 0, movedTrack)
+
+            return {
+              ...playlist,
+              tracks: nextTracks,
+            }
+          }),
         }))
       },
       clearPlaylist: (playlistId) => {

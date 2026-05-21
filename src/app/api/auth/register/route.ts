@@ -1,7 +1,6 @@
 import bcrypt from 'bcryptjs'
-import { MongoServerError, ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
-import { createAccessToken, createRefreshToken, getUsersCollection, setRefreshCookie, toAuthUser, type UserDocument } from '@/lib/server/auth'
+import { createAccessToken, createRefreshToken, createUser, DuplicateUserError, setRefreshCookie, toAuthUser } from '@/lib/server/auth'
 import { isValidEmail, isValidPassword, isValidUsername, normalizeEmail, normalizeUsername } from '@/lib/server/validation'
 
 export const runtime = 'nodejs'
@@ -24,36 +23,19 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: '비밀번호는 8자 이상이어야 해요' }, { status: 400 })
     }
 
-    const users = await getUsersCollection()
-    const now = new Date()
     const passwordHash = await bcrypt.hash(password, 12)
-    const newUser: UserDocument = {
-      _id: new ObjectId(),
+    const user = await createUser({
       email,
       username,
-      passwordHash,
-      plan: 'FREE',
-      createdAt: now,
-      updatedAt: now
-    }
-    await users.insertOne(newUser)
-
-    const user: UserDocument = {
-      _id: newUser._id,
-      email,
-      username,
-      passwordHash,
-      plan: 'FREE',
-      createdAt: now,
-      updatedAt: now
-    }
+      passwordHash
+    })
 
     const accessToken = createAccessToken(user)
     setRefreshCookie(createRefreshToken(user))
 
     return NextResponse.json({ data: { user: toAuthUser(user), accessToken } }, { status: 201 })
   } catch (error) {
-    if (error instanceof MongoServerError && error.code === 11000) {
+    if (error instanceof DuplicateUserError) {
       return NextResponse.json({ error: '이미 사용 중인 이메일 또는 사용자 이름이에요' }, { status: 409 })
     }
     console.error('Register failed:', error)
